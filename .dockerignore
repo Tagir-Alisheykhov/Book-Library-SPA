@@ -1,0 +1,10 @@
+*
+!Dockerfile
+!.dockerignore
+!pyproject.toml
+!poetry.lock
+!manage.py
+!config/
+!accounts/
+!habits/
+!static/
