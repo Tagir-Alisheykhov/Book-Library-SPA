@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "drf_yasg",
     'accounts',
+    "library"
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,7 @@ TEMPLATES = [
 
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": (
-        "django_filters.rest_framework.DjangoFilterBackend"
+        "django_filters.rest_framework.DjangoFilterBackend",
     ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",

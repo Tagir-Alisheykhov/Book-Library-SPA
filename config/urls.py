@@ -24,12 +24,10 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    path("accounts/", include("accounts.urls", namespace="accounts")),
-
+    path("api/accounts/", include("accounts.urls", namespace="accounts")),
+    path("api/library/", include("library.urls", namespace="library")),
 
     # API Documentation
     path(
