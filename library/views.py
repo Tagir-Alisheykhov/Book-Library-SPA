@@ -127,12 +127,15 @@ class BookIssueListCreateView(generics.ListCreateAPIView):
     Создать но
     serializer_class = BookIssueSerializer
     """
+    serializer_class = BookIssueSerializer
 
     def get_queryset(self):
         """Пользователи видят только свои выдачи, админы - все"""
-        if self.request.user.is_staff:
-            return BookIssue.objects.all()
-        return BookIssue.objects.filter(user=self.request.user)
+        if self.request.user.is_authenticated:
+            if self.request.user.is_staff:
+                return BookIssue.objects.all()
+            return BookIssue.objects.filter(user=self.request.user)
+        return BookIssue.objects.none()
 
     def get_permissions(self):
         """Только персонал может выдавать книги"""
@@ -167,9 +170,11 @@ class BookIssueDetailView(generics.RetrieveUpdateAPIView):
 
     def get_queryset(self):
         """Пользователи видят только свои выдачи, админы - все"""
-        if self.request.user.is_staff:
-            return BookIssue.objects.all()
-        return BookIssue.objects.filter(user=self.request.user)
+        if self.request.user.is_authenticated:
+            if self.request.user.is_staff:
+                return BookIssue.objects.all()
+            return BookIssue.objects.filter(user=self.request.user)
+        return BookIssue.objects.none()
 
     def update(self, request, *args, **kwargs):
         """Логика возврата книги"""

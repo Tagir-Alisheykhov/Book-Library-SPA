@@ -166,3 +166,5 @@ cython_debug/
 misc.xml
 modules.xml
 workspace.xml
+.env*
+!.env.example

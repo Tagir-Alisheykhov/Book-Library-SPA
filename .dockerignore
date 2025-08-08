@@ -6,5 +6,6 @@
 !manage.py
 !config/
 !accounts/
-!habits/
+!library/
 !static/
+!requirements.txt
