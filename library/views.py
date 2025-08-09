@@ -87,7 +87,7 @@ class BookListCreateView(generics.ListCreateAPIView):
 
     def get_permissions(self):
         if self.request.method == 'POST':
-            return [IsAdminUser()]
+            return [IsAdminUser()]  # Только админы/персонал
         return [IsAuthenticated()]
 
     def perform_create(self, serializer):
@@ -175,6 +175,11 @@ class BookIssueDetailView(generics.RetrieveUpdateAPIView):
                 return BookIssue.objects.all()
             return BookIssue.objects.filter(user=self.request.user)
         return BookIssue.objects.none()
+
+    def get_permissions(self):
+        if self.request.method in ['PUT', 'PATCH', 'DELETE']:
+            return [IsAdminUser()]  # Только админы/персонал
+        return [IsAuthenticated()]
 
     def update(self, request, *args, **kwargs):
         """Логика возврата книги"""
