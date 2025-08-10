@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "drf_yasg",
     'accounts',
+    "library"
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,7 @@ TEMPLATES = [
 
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": (
-        "django_filters.rest_framework.DjangoFilterBackend"
+        "django_filters.rest_framework.DjangoFilterBackend",
     ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -134,7 +135,7 @@ CORS_ALLOW_ALL_ORIGINS = (
 )
 
 if not CORS_ALLOW_ALL_ORIGINS:
-    cors_frontend = os.getenv(os.getenv("CORS_FRONTEND"), "")
+    cors_frontend = os.getenv("CORS_FRONTEND", "")
     if cors_frontend:
         # Разделяем строку по запятым и убираем лишние пробелы
         CORS_ALLOWED_ORIGINS = [
@@ -144,6 +145,8 @@ if not CORS_ALLOW_ALL_ORIGINS:
         CORS_ALLOWED_ORIGINS = []
 else:
     CORS_ALLOWED_ORIGINS = []
+
+# Настройка CSRF
 csrf_origins = os.getenv("CORS_FRONTEND", "")
 if csrf_origins:
     CSRF_TRUSTED_ORIGINS = [
